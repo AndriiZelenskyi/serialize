@@ -1,5 +1,6 @@
 import {FIELDS_METADATA_KEY} from "./metadata.keys";
 import {FieldMetadata} from "./field.metadata";
+import {NoFieldsError} from "./no-fields.error";
 
 
 /**
@@ -15,7 +16,7 @@ export function serialize(model: Object): Object {
     const fields = Reflect.getMetadata(FIELDS_METADATA_KEY, modelPrototype) as FieldMetadata[] | undefined;
 
     if(fields === undefined) {
-        throw new Error('Model without available fields for serialization. Did you miss SerializableField()?');
+        throw new NoFieldsError();
     }
 
     // Convert array of field metadata to json object
