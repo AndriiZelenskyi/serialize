@@ -11,5 +11,8 @@
     "serialize"
   ],
   "author": "Andrew Zelenskiy",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "reflect-metadata": "^0.1.10"
+  }
 }

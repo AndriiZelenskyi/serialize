@@ -1,1 +1,3 @@
-console.log('Hello, world!');
+import {testMainFunction} from "./test/main";
+
+testMainFunction();
