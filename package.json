@@ -1,0 +1,15 @@
+{
+  "name": "serialize",
+  "version": "1.0.0",
+  "description": "Serializers for typescript",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "typescript",
+    "serialize"
+  ],
+  "author": "Andrew Zelenskiy",
+  "license": "ISC"
+}
