@@ -1,5 +1,5 @@
 
 export interface Serializer<T extends Object> {
-    serialize: (model: T) => Object;
-    deserialize: (json: Object) => T;
+    serialize: (model: T) => Object | null;
+    deserialize: (json: Object) => T | null;
 }
