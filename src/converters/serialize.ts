@@ -1,6 +1,6 @@
-import {FIELDS_METADATA_KEY} from "./metadata.keys";
-import {FieldMetadata} from "./field.metadata";
-import {NoFieldsError} from "./no-fields.error";
+import {FIELDS_METADATA_KEY} from "../metadata.keys";
+import {FieldMetadata} from "../field/field.metadata";
+import {NoFieldsError} from "../errors/no-fields.error";
 
 
 /**
@@ -21,7 +21,7 @@ export function serialize(model: Object): Object {
 
     // Convert array of field metadata to json object
     return fields.reduce((previousValue: Object, currentValue: FieldMetadata) => {
-        (previousValue as any)[currentValue.name] = (model as any)[currentValue.propertyName];
+        (previousValue as any)[currentValue.name] = currentValue.serializer.serialize((model as any)[currentValue.propertyName]);
         return previousValue;
     }, {});
 }

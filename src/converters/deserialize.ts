@@ -1,7 +1,7 @@
-import {Type} from "./type";
-import {FIELDS_METADATA_KEY} from "./metadata.keys";
-import {FieldMetadata} from "./field.metadata";
-import {NoFieldsError} from "./no-fields.error";
+import {Type} from "../type";
+import {FIELDS_METADATA_KEY} from "../metadata.keys";
+import {FieldMetadata} from "../field/field.metadata";
+import {NoFieldsError} from "../errors/no-fields.error";
 
 /**
  * Convert json for type that you need with updated names
@@ -20,8 +20,8 @@ export function deserialize<T extends Object>(json: Object, modelType: Type<T>):
     }
 
     // Simple serialization
-    // TODO: Move to serializers
-    fields.forEach(fieldMetadata => (<any>model)[fieldMetadata.propertyName] = (<any>json)[fieldMetadata.name]);
+    fields.forEach(fieldMetadata =>
+        (<any>model)[fieldMetadata.propertyName] = fieldMetadata.serializer.deserialize((<any>json)[fieldMetadata.name]));
 
     return model;
 }
