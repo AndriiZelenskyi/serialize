@@ -1,6 +1,7 @@
 import {Type} from "../type";
 import {Serializer} from "./serializer";
 import {PrimitiveSerializer} from "./primitive.serializer";
+import {DateSerializer} from "./date.serializer";
 
 let instance: SerializersFactory;
 
@@ -23,6 +24,7 @@ export class SerializersFactory {
             instance = new SerializersFactory();
             instance.registerSerializer<Number>(Number, <Serializer<Number>>new PrimitiveSerializer());
             instance.registerSerializer<String>(String, <Serializer<String>>new PrimitiveSerializer());
+            instance.registerSerializer<Date>(Date, <Serializer<Date>>new DateSerializer());
         }
         return instance;
     }
