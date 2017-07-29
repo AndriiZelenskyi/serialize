@@ -6,7 +6,7 @@ import {SerializersFactory} from "../serializers/serializers.factory";
 import {Serializer} from "../serializers/serializer";
 import {NoSerializerError} from "../errors/no-serializer.error";
 
-export function SerializableField(config?: FieldConfig): PropertyDecorator {
+export function Field(config?: FieldConfig): PropertyDecorator {
     return (target, propertyKey) => {
         const fieldsMetadata = Reflect.getMetadata(FIELDS_METADATA_KEY, target) || [];
 

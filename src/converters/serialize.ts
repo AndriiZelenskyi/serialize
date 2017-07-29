@@ -6,7 +6,7 @@ import {NoFieldsError} from "../errors/no-fields.error";
 /**
  * Convert model to json with metadata names
  *
- * Fields that not are labeled as {@link SerializableField} will be ignore
+ * Fields that not are labeled as {@link Field} will be ignore
  *
  * @param {Object} model Serializable model that was convert to json
  * @returns {Object} JSON object
