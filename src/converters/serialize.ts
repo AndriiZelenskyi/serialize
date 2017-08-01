@@ -9,7 +9,7 @@ import {NoFieldsError} from "../errors/no-fields.error";
  * Fields that not are labeled as {@link Field} will be ignore
  *
  * @param {Object} model Serializable model that was convert to json
- * @returns {Object} JSON object
+ * @returns {Object} Server object
  */
 export function serialize(model: Object): Object {
     const modelPrototype = Object.getPrototypeOf(model);

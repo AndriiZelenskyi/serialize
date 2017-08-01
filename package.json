@@ -1,8 +1,8 @@
 {
-  "name": "serialize",
+  "name": "serialize-ts",
   "version": "1.0.0",
   "description": "Serializers for typescript",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "test"
   },
@@ -10,7 +10,7 @@
     "typescript",
     "serialize"
   ],
-  "author": "Andrew Zelenskiy",
+  "author": "xoll",
   "license": "ISC",
   "dependencies": {
     "reflect-metadata": "^0.1.10"

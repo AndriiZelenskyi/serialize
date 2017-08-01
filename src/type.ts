@@ -1,3 +1,1 @@
-export type Type<T extends Object> = Constructor<T>;
-
-type Constructor<T extends Object> = {new(): T};
+export type Type<T extends Object> = {new(): T};
