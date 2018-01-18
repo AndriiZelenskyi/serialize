@@ -4,7 +4,8 @@
   "description": "Serializers for typescript",
   "main": "dist/index.js",
   "scripts": {
-    "test": "test"
+    "test": "karma start karma.conf.js",
+    "compile": "tsc src/**.ts"
   },
   "keywords": [
     "typescript",
@@ -18,5 +19,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/AndreyZelenskiy/serialize.git"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.4",
+    "jasmine": "^2.9.0",
+    "jasmine-core": "^2.9.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-typescript": "^3.0.9",
+    "typescript": "^2.6.2"
   }
 }
