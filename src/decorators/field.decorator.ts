@@ -2,9 +2,9 @@ import 'reflect-metadata';
 import {FieldConfig} from "../field/field.config";
 import {FieldMetadata} from "../field/field.metadata";
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
-import {SerializersFactory} from "../serializers/serializers.factory";
-import {Serializer} from "../serializers/serializer";
-import {NoSerializerError} from "../errors/no-serializer.error";
+import {SerializersFactory} from "../serializers";
+import {Serializer} from "../serializers";
+import {NoSerializerError} from "../errors";
 
 export function Field(config?: FieldConfig): PropertyDecorator {
     return (target, propertyKey) => {

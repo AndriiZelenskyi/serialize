@@ -1,6 +1,6 @@
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
 import {FieldMetadata} from "../field/field.metadata";
-import {NoFieldsError} from "../errors/no-fields.error";
+import {NoFieldsError} from "../errors";
 
 
 /**
