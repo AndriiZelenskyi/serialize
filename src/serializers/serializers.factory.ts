@@ -22,9 +22,9 @@ export class SerializersFactory {
     static get instance(): SerializersFactory {
         if(!instance) {
             instance = new SerializersFactory();
-            instance.registerSerializer<Number>(Number, <Serializer<Number>>new PrimitiveSerializer());
-            instance.registerSerializer<String>(String, <Serializer<String>>new PrimitiveSerializer());
-            instance.registerSerializer<Date>(Date, <Serializer<Date>>new DateSerializer());
+            instance.registerSerializer<Number>(Number, new PrimitiveSerializer<Number>());
+            instance.registerSerializer<String>(String, new PrimitiveSerializer<String>());
+            instance.registerSerializer<Date>(Date, new DateSerializer<Date>());
         }
         return instance;
     }
