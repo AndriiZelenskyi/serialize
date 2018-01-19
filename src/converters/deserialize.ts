@@ -1,7 +1,8 @@
 import {Type} from "../type";
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
 import {FieldMetadata} from "../field/field.metadata";
-import {NoFieldsError} from "../errors/no-fields.error";
+import {NoFieldsError} from "../errors";
+import {getPropertyOfJson, parseJsonPropertyName} from "./json-utils";
 
 /**
  * Convert json for type that you need with updated names
@@ -20,8 +21,17 @@ export function deserialize<T extends Object>(json: Object, modelType: Type<T>):
     }
 
     // Simple serialization
-    fields.forEach(fieldMetadata =>
-        (<any>model)[fieldMetadata.propertyName] = fieldMetadata.serializer.deserialize((<any>json)[fieldMetadata.name]));
+    fields.forEach(getDeserialization(model, json));
 
     return model;
+}
+
+function setFieldMetadataToModel(model: {[k: string]: any}, fieldMetadata: FieldMetadata, json: Object): void {
+    const address = parseJsonPropertyName(<string>fieldMetadata.jsonPropertyName);
+    const jsonValue = getPropertyOfJson(json, address) || {};
+    model[fieldMetadata.modelPropertyName] = fieldMetadata.serializer.deserialize(jsonValue)
+}
+
+function getDeserialization(model: Object, json: Object): (fieldMetadata: FieldMetadata) => void {
+    return fieldMetadata => setFieldMetadataToModel(model, fieldMetadata, json);
 }

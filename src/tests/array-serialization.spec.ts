@@ -53,7 +53,7 @@ describe('Array serialization and deserialization', () => {
         class TestModel {
             @Field({
                 serializer: new ArraySerializer(new ModelSerializer(SubModel)),
-                name: 'children'
+                jsonPropertyName: 'children'
             })
             subModels: SubModel[];
         }

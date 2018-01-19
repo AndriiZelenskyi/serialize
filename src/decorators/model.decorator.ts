@@ -1,7 +1,7 @@
-import {Serializer} from "../serializers/serializer";
+import {Serializer} from "../serializers";
 import {Type} from "../type";
-import {ModelSerializer} from "../serializers/model.serializer";
-import {SerializersFactory} from "../serializers/serializers.factory";
+import {ModelSerializer} from "../serializers";
+import {SerializersFactory} from "../serializers";
 
 export function Model(serializer?: Serializer<any>) {
     return (target: Type<any>) => {
