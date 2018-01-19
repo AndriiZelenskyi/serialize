@@ -22,7 +22,9 @@ export function serialize(model: {[key: string]: any}): Object {
 
     // Convert array of field metadata to json object
     return fields.reduce((previousValue: {[k: string]: any}, currentValue: FieldMetadata) => {
-        setPropertyToJson(previousValue, parseJsonPropertyName(<string>currentValue.jsonPropertyName), currentValue.serializer.serialize(model[currentValue.modelPropertyName]));
+        const address = parseJsonPropertyName(<string>currentValue.jsonPropertyName);
+        const serializedModelValue = currentValue.serializer.serialize(model[currentValue.modelPropertyName]);
+        setPropertyToJson(previousValue, address, serializedModelValue);
         return previousValue;
     }, {});
 }
