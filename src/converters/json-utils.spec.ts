@@ -1,4 +1,4 @@
-import {parseJsonPropertyName, setPropertyToJson} from "./json-utils";
+import {getPropertyOfJson, parseJsonPropertyName, setPropertyToJson} from "./json-utils";
 
 describe('JSON utils test', () => {
     const propertyNameWithPoints = 'user.authentication-information.email';
@@ -25,9 +25,28 @@ describe('JSON utils test', () => {
         };
         const email = 'test@email.com';
         const expectedObject = {
-            user: {test: 'Test', 'authentication-information': {email}}
+            user: {test: 'Test', 'authentication-information': {email: email}}
         };
 
         expect(setPropertyToJson(obj, testAddress, email)).toEqual(expectedObject);
-    })
+    });
+
+    it('should return value of property by address', () => {
+        const email = 'test@email.com';
+        const obj = {user: {auth: {email}}};
+
+        expect(getPropertyOfJson(obj, ['user', 'auth', 'email'])).toEqual(email);
+    });
+
+    it('should return null if address is incorrect', () => {
+        const obj = {user: {auth: {email: 'TTTT'}}};
+
+        expect(getPropertyOfJson(obj, ['test', 'auth', 'email'])).toBeNull();
+    });
+
+    it('should return null if value is empty', () => {
+        const obj = {user: {auth: {email: undefined}}};
+
+        expect(getPropertyOfJson(obj, ['user', 'auth', 'email'])).toBeNull();
+    });
 });
