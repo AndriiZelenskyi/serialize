@@ -5,7 +5,7 @@ class TestModel {
     @Field()
     id: number;
 
-    @Field({name: 'user.authentication-information.email'})
+    @Field({jsonPropertyName: 'user.authentication-information.email'})
     email: string;
 }
 

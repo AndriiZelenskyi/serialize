@@ -1,6 +1,6 @@
-import {Serializer} from "../serializers/serializer";
+import {Serializer} from "../serializers";
 
 export interface FieldConfig {
-    name?: string | symbol;
+    jsonPropertyName?: string | symbol;
     serializer?: Serializer<any>;
 }

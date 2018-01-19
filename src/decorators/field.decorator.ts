@@ -11,8 +11,8 @@ export function Field(config?: FieldConfig): PropertyDecorator {
         const fieldsMetadata = Reflect.getMetadata(FIELDS_METADATA_KEY, target) || [];
 
         const metadata: FieldMetadata = {
-            propertyName: propertyKey,
-            name: propertyKey,
+            modelPropertyName: propertyKey,
+            jsonPropertyName: propertyKey,
             serializer: getSerializer(),
             ...config
         };

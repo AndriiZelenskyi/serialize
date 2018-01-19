@@ -5,12 +5,12 @@ class TestModel {
     @Field()
     id: number;
 
-    @Field({name: 'inputBodyName'})
+    @Field({jsonPropertyName: 'inputBodyName'})
     body: string;
 }
 
 describe('Primitive serializers tests', function () {
-    describe('With default name', () => {
+    describe('With default jsonPropertyName', () => {
         const tJSON = {
             id: 12,
             inputBodyName: null
@@ -30,7 +30,7 @@ describe('Primitive serializers tests', function () {
         })
     });
 
-    describe('With custom name', () => {
+    describe('With custom jsonPropertyName', () => {
         const tJSON = {
             id: null,
             inputBodyName: 'Test boby txt'

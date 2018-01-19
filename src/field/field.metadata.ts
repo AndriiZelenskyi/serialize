@@ -1,8 +1,14 @@
 import {FieldConfig} from "./field.config";
-import {Serializer} from "../serializers/serializer";
+import {Serializer} from "../serializers";
 
 export interface FieldMetadata extends FieldConfig {
-    propertyName: string | symbol;
-    name: string | symbol;
+    /**
+     * Name of property in Model
+     */
+    modelPropertyName: string | symbol;
+    /**
+     * JSON jsonPropertyName
+     */
+    jsonPropertyName: string | symbol;
     serializer: Serializer<any>;
 }

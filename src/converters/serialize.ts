@@ -21,7 +21,7 @@ export function serialize(model: Object): Object {
 
     // Convert array of field metadata to json object
     return fields.reduce((previousValue: Object, currentValue: FieldMetadata) => {
-        (previousValue as any)[currentValue.name] = currentValue.serializer.serialize((model as any)[currentValue.propertyName]);
+        (previousValue as any)[currentValue.jsonPropertyName] = currentValue.serializer.serialize((model as any)[currentValue.modelPropertyName]);
         return previousValue;
     }, {});
 }

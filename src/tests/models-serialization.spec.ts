@@ -13,7 +13,7 @@ class TestModel {
     @Field({serializer: new ModelSerializer(SubModel)})
     subModel: SubModel;
 
-    @Field({name: 'inputModel', serializer: new ModelSerializer(SubModel)})
+    @Field({jsonPropertyName: 'inputModel', serializer: new ModelSerializer(SubModel)})
     secondSubModel: SubModel;
 }
 
