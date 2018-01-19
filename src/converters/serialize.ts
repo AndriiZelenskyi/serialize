@@ -1,6 +1,7 @@
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
 import {FieldMetadata} from "../field/field.metadata";
 import {NoFieldsError} from "../errors";
+import {parseJsonPropertyName, setPropertyToJson} from "./json-utils";
 
 
 /**
@@ -11,7 +12,7 @@ import {NoFieldsError} from "../errors";
  * @param {Object} model Serializable model that was convert to json
  * @returns {Object} Server object
  */
-export function serialize(model: Object): Object {
+export function serialize(model: {[key: string]: any}): Object {
     const modelPrototype = Object.getPrototypeOf(model);
     const fields = Reflect.getMetadata(FIELDS_METADATA_KEY, modelPrototype) as FieldMetadata[] | undefined;
 
@@ -20,8 +21,8 @@ export function serialize(model: Object): Object {
     }
 
     // Convert array of field metadata to json object
-    return fields.reduce((previousValue: Object, currentValue: FieldMetadata) => {
-        (previousValue as any)[currentValue.jsonPropertyName] = currentValue.serializer.serialize((model as any)[currentValue.modelPropertyName]);
+    return fields.reduce((previousValue: {[k: string]: any}, currentValue: FieldMetadata) => {
+        setPropertyToJson(previousValue, parseJsonPropertyName(<string>currentValue.jsonPropertyName), currentValue.serializer.serialize(model[currentValue.modelPropertyName]));
         return previousValue;
     }, {});
 }
