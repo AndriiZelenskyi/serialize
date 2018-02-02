@@ -1,6 +1,6 @@
 import {Serializer} from "./serializer";
 
-export class PrimitiveSerializer<T extends Number | String | Symbol> implements Serializer<T>{
+export class PrimitiveSerializer<T extends Number | String> implements Serializer<T>{
     serialize: (model: T) => Object;
     deserialize: (json: Object) => T;
 
