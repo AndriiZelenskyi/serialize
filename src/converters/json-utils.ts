@@ -1,10 +1,12 @@
+import {ifPresentGet} from "../serializers/field.utils";
+
 export function parseJsonPropertyName(fullName: string): string[] {
     return fullName.split('.');
 }
 
 export function setPropertyToJson(json: Object, propertyAddress: string[], value: any): Object {
     const {reduce, lastAddress} = reduceAddress(json, propertyAddress);
-    if (lastAddress) {
+    if (lastAddress && value !== undefined) {
         reduce[lastAddress] = value;
     }
     return json;
@@ -12,7 +14,8 @@ export function setPropertyToJson(json: Object, propertyAddress: string[], value
 
 export function getPropertyOfJson(json: Object, propertyAddress: string[]): Object | null {
     const {reduce, lastAddress} = reduceAddress(json, propertyAddress);
-    return reduce[lastAddress || ''] || null;
+    const value = reduce[ifPresentGet(lastAddress, '')(lastAddress)];
+    return ifPresentGet(value, null)(value);
 }
 
 function reduceAddress(json: Object, propertyAddress: string[]): {lastAddress: string, reduce: {[k: string]: any}} {
