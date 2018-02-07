@@ -58,4 +58,19 @@ describe('Optional model fields', () => {
             expect(deserializedModel).toEqual(model);
         });
     });
+
+    describe('Missing sub model', () => {
+        const JSON = {};
+        const model = new TestModel();
+
+        it('should serialize', () => {
+            const serializedJSON = serialize(model);
+            expect(serializedJSON).toEqual(JSON);
+        });
+
+        it('should deserialize', () => {
+            const deserializedModel = deserialize(JSON, TestModel);
+            expect(deserializedModel).toEqual(model);
+        });
+    })
 });
