@@ -1,12 +1,13 @@
 import {Serializer} from "./serializer";
+import {ifPresentGet} from "./field.utils";
 
 export class PrimitiveSerializer<T extends Number | String> implements Serializer<T>{
-    serialize: (model: T) => Object;
-    deserialize: (json: Object) => T;
+    serialize: (model: T) => Object | null;
+    deserialize: (json: Object) => T | null;
 
     constructor() {
-        this.serialize = model => model || null;
-        this.deserialize = json => <T>json || null;
+        this.serialize = model => ifPresentGet(model, <any>undefined)(model);
+        this.deserialize = json => ifPresentGet(<T>json, <any>undefined)(json);
     }
 }
 
