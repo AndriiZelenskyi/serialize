@@ -28,8 +28,10 @@ export function deserialize<T extends Object>(json: Object, modelType: Type<T>):
 
 function setFieldMetadataToModel(model: {[k: string]: any}, fieldMetadata: FieldMetadata, json: Object): void {
     const address = parseJsonPropertyName(<string>fieldMetadata.jsonPropertyName);
-    const jsonValue = getPropertyOfJson(json, address) || {};
-    model[fieldMetadata.modelPropertyName] = fieldMetadata.serializer.deserialize(jsonValue)
+    const jsonValue = getPropertyOfJson(json, address);
+    if(jsonValue !== null) {
+        model[fieldMetadata.modelPropertyName] = fieldMetadata.serializer.deserialize(jsonValue)
+    }
 }
 
 function getDeserialization(model: Object, json: Object): (fieldMetadata: FieldMetadata) => void {
