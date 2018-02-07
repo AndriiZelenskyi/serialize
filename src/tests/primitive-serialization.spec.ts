@@ -12,8 +12,7 @@ class TestModel {
 describe('Primitive serializers tests', function () {
     describe('With default jsonPropertyName', () => {
         const tJSON = {
-            id: 12,
-            inputBodyName: null
+            id: 12
         };
         const test = new TestModel();
         test.id = 12;
@@ -32,7 +31,6 @@ describe('Primitive serializers tests', function () {
 
     describe('With custom jsonPropertyName', () => {
         const tJSON = {
-            id: null,
             inputBodyName: 'Test boby txt'
         };
         const tModel = new TestModel();
@@ -70,4 +68,21 @@ describe('Primitive serializers tests', function () {
             expect(deserializedModel).toEqual(tModel);
         });
     });
+    describe('Zero number serialization', () => {
+        const tJSON = {
+            id: 0
+        };
+        const tModel = new TestModel();
+        tModel.id = 0;
+
+        it('should serialize', () => {
+            const serializedJSON = serialize(tModel);
+            expect(serializedJSON).toEqual(tJSON);
+        });
+
+        it('should deserialize', () => {
+            const deserializedModel = deserialize(tJSON, TestModel);
+            expect(deserializedModel).toEqual(tModel);
+        });
+    })
 });

@@ -49,4 +49,9 @@ describe('JSON utils test', () => {
 
         expect(getPropertyOfJson(obj, ['user', 'auth', 'email'])).toBeNull();
     });
+
+    it('should return zero from json', () => {
+        const obj = {id: 0};
+        expect(getPropertyOfJson(obj, ['id'])).toEqual(0);
+    })
 });
