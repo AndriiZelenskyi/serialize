@@ -1,11 +1,13 @@
 {
   "name": "serialize-ts",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Serializers for typescript",
   "main": "dist/index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "compile": "tsc -p ./tsconfig.json"
+    "test-once": "karma start karma.conf.js --single-run",
+    "compile": "tsc -p ./tsconfig.json",
+    "prepublish": "yarn test-once && yarn compile"
   },
   "keywords": [
     "typescript",
