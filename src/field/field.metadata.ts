@@ -5,10 +5,10 @@ export interface FieldMetadata extends FieldConfig {
     /**
      * Name of property in Model
      */
-    modelPropertyName: string | symbol;
+    modelPropertyName: string;
     /**
      * JSON jsonPropertyName
      */
-    jsonPropertyName: string | symbol;
+    jsonPropertyName: string;
     serializer: Serializer<any>;
 }

@@ -7,12 +7,14 @@ import {Serializer} from "../serializers";
 import {NoSerializerError} from "../errors";
 
 export function Field(config?: FieldConfig): PropertyDecorator {
-    return (target, propertyKey) => {
+    return (target, propertyKey: string | symbol) => {
+        const stringifiedKey: string = convertToString(propertyKey)
+
         const fieldsMetadata = Reflect.getMetadata(FIELDS_METADATA_KEY, target) || [];
 
         const metadata: FieldMetadata = {
-            modelPropertyName: propertyKey,
-            jsonPropertyName: propertyKey,
+            modelPropertyName: stringifiedKey,
+            jsonPropertyName: stringifiedKey,
             serializer: getSerializer(),
             ...config
         };
@@ -29,11 +31,17 @@ export function Field(config?: FieldConfig): PropertyDecorator {
             const serializer = SerializersFactory.instance.getSerializer(fieldType);
 
             if (serializer === undefined) {
-                console.log(fieldType);
-                throw new NoSerializerError(propertyKey);
+                throw new NoSerializerError(stringifiedKey);
             }
 
             return serializer;
         }
     }
+}
+
+function convertToString(input: string | symbol): string{
+    if(typeof input === 'symbol') {
+        return input.toString();
+    }
+    return input;
 }
