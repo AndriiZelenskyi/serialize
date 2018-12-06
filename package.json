@@ -11,7 +11,12 @@
   },
   "keywords": [
     "typescript",
-    "serialize"
+    "serialize",
+    "serialization",
+    "deserialization",
+    "converters",
+    "json",
+    "http"
   ],
   "author": "xoll",
   "license": "ISC",
