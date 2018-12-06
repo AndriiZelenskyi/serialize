@@ -1,5 +1,5 @@
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
-import {FieldMetadata} from "../field/field.metadata";
+import {FieldMetadata, getMetadata} from "../field/field.metadata";
 import {NoFieldsError} from "../errors";
 import {parseJsonPropertyName, setPropertyToJson} from "./json-utils";
 import 'reflect-metadata';
@@ -16,9 +16,9 @@ import {isPresent} from "../serializers/field.utils";
  */
 export function serialize(model: { [key: string]: any }): Object {
     const modelPrototype = Object.getPrototypeOf(model);
-    const fields = Reflect.getMetadata(FIELDS_METADATA_KEY, modelPrototype) as FieldMetadata[] | undefined;
+    const fields = getMetadata(modelPrototype);
 
-    if (fields === undefined) {
+    if (fields.length === 0) {
         throw new NoFieldsError();
     }
 

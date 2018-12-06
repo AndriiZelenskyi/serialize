@@ -2,6 +2,7 @@ import { Type, isType } from "../type";
 import { Serializer as ISerializer, SerializersFactory } from "../serializers";
 import { NoSerializerError } from "../errors/no-serializer.error";
 import { __FIELD_SERIALIZER_METADATA_KEY } from "../metadata.keys";
+import { defineFieldName } from "../field/field.metadata";
 
 /**
  * Defines a serializer for any serialization or deserialization of your field
@@ -40,6 +41,7 @@ export function Serializer<T extends Object>(
       target,
       key
     );
+    defineFieldName(target, key);
   };
 }
 

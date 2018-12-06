@@ -1,6 +1,6 @@
 import {Type} from "../type";
 import {FIELDS_METADATA_KEY} from "../metadata.keys";
-import {FieldMetadata} from "../field/field.metadata";
+import {FieldMetadata, getMetadata} from "../field/field.metadata";
 import {NoFieldsError} from "../errors";
 import {getPropertyOfJson, parseJsonPropertyName} from "./json-utils";
 
@@ -14,9 +14,9 @@ import {getPropertyOfJson, parseJsonPropertyName} from "./json-utils";
 export function deserialize<T extends Object>(json: Object, modelType: Type<T>): T {
     const model = new modelType();
     const modelPrototype = Object.getPrototypeOf(model);
-    const fields = Reflect.getMetadata(FIELDS_METADATA_KEY, modelPrototype) as FieldMetadata[] | undefined;
+    const fields = getMetadata(modelPrototype);
 
-    if(fields === undefined) {
+    if(fields.length === 0) {
         throw new NoFieldsError();
     }
 
