@@ -1,6 +1,6 @@
-import {__FIELD_JSON_NAME_METADATA_KEY, __FIELD_CLASS_FIELDS_METADATA_KEY} from '../metadata.keys';
+import {__FIELD_JSON_NAME_METADATA_KEY, __FIELD_CLASS_FIELDS_METADATA_KEY} from '../metadata/metadata.keys';
 import 'reflect-metadata'
-import { defineFieldName } from '../field/field.metadata';
+import {defineFieldName} from '../metadata/define-field-name';
 
 // TODO: Add examples in JSDoc
 /**

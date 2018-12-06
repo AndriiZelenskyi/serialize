@@ -1,7 +1,9 @@
-import {Field} from "../decorators";
+import {Field, Model} from "../decorators";
 import {deserialize, serialize} from "../converters";
 import {ModelSerializer} from "../serializers";
+import { Name } from "../decorators/name.decorator";
 
+@Model()
 class SubModel {
     @Field()
     id: number;
@@ -10,10 +12,11 @@ class SubModel {
 }
 
 class TestModel {
-    @Field({serializer: new ModelSerializer(SubModel)})
+    @Field()
     subModel: SubModel;
 
-    @Field({jsonPropertyName: 'inputModel', serializer: new ModelSerializer(SubModel)})
+    @Field()
+    @Name('inputModel')
     secondSubModel: SubModel;
 }
 

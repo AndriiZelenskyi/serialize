@@ -1,10 +1,10 @@
-import {FIELDS_METADATA_KEY} from "../metadata.keys";
-import {FieldMetadata, getMetadata} from "../field/field.metadata";
-import {NoFieldsError} from "../errors";
-import {parseJsonPropertyName, setPropertyToJson} from "./json-utils";
-import 'reflect-metadata';
-import {isPresent} from "../serializers/field.utils";
-
+import { FIELDS_METADATA_KEY } from "../metadata/metadata.keys";
+import { FieldMetadata } from "../field/field.metadata";
+import { NoFieldsError } from "../errors";
+import { parseJsonPropertyName, setPropertyToJson } from "./json-utils";
+import "reflect-metadata";
+import { isPresent } from "../serializers/field.utils";
+import { getMetadata } from "../metadata/get-metadata";
 
 /**
  * Convert model to json with metadata names
@@ -15,23 +15,30 @@ import {isPresent} from "../serializers/field.utils";
  * @returns {Object} Server object
  */
 export function serialize(model: { [key: string]: any }): Object {
-    const modelPrototype = Object.getPrototypeOf(model);
-    const fields = getMetadata(modelPrototype);
+  const modelPrototype = Object.getPrototypeOf(model);
+  const fields = getMetadata(modelPrototype);
 
-    if (fields.length === 0) {
-        throw new NoFieldsError();
-    }
+  if (fields.length === 0) {
+    throw new NoFieldsError();
+  }
 
-    // Convert array of field metadata to json object
-    return fields.reduce((previousValue: { [k: string]: any }, currentValue: FieldMetadata) => {
-        const address = parseJsonPropertyName(<string>currentValue.jsonPropertyName);
+  // Convert array of field metadata to json object
+  return fields.reduce(
+    (previousValue: { [k: string]: any }, currentValue: FieldMetadata) => {
+      const address = parseJsonPropertyName(<string>(
+        currentValue.jsonPropertyName
+      ));
 
-        const modelValue = model[currentValue.modelPropertyName];
-        if (isPresent(modelValue)) {
-            const serializedModelValue = currentValue.serializer.serialize(modelValue);
-            setPropertyToJson(previousValue, address, serializedModelValue);
-        }
+      const modelValue = model[currentValue.modelPropertyName];
+      if (isPresent(modelValue)) {
+        const serializedModelValue = currentValue.serializer.serialize(
+          modelValue
+        );
+        setPropertyToJson(previousValue, address, serializedModelValue);
+      }
 
-        return previousValue;
-    }, {});
+      return previousValue;
+    },
+    {}
+  );
 }

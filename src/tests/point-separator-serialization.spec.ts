@@ -1,11 +1,13 @@
 import {Field} from "../decorators";
 import {deserialize, serialize} from "../converters";
+import { Name } from "../decorators/name.decorator";
 
 class TestModel {
     @Field()
     id: number;
 
-    @Field({jsonPropertyName: 'user.authentication-information.email'})
+    @Field()
+    @Name('user.authentication-information.email')
     email: string;
 }
 
