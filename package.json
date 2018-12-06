@@ -7,7 +7,8 @@
     "test": "karma start karma.conf.js",
     "test-once": "karma start karma.conf.js --single-run",
     "compile": "tsc -p ./tsconfig.json",
-    "prepublish": "yarn test-once && yarn compile"
+    "prepublish": "yarn test-once && yarn compile",
+    "format": "prettier-tslint fix '**/*.ts' "
   },
   "keywords": [
     "typescript",
@@ -21,6 +22,7 @@
   "author": "xoll",
   "license": "ISC",
   "dependencies": {
+    "prettier": "^1.15.3",
     "reflect-metadata": "^0.1.10"
   },
   "repository": {
@@ -35,6 +37,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.1",
     "karma-typescript": "^3.0.9",
+    "prettier-tslint": "^0.4.0",
     "typescript": "^2.6.2"
   }
 }
