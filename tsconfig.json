@@ -12,8 +12,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false,
-    "allowJs": true
+    "strictPropertyInitialization": false
   },
   "include": ["src/**.ts", "src/metadata/metadata.keys.ts", "src/field/metadata.keys.ts", "src/metadata/define-metadata-once.ts"],
   "exclude": ["**.spec.ts"]
