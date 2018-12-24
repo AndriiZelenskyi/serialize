@@ -5,6 +5,9 @@ class TestModel {
     @Field()
     id: number;
 
+    @Field()
+    bool: boolean;
+
     @Field({jsonPropertyName: 'inputBodyName'})
     body: string;
 }
@@ -51,10 +54,12 @@ describe('Primitive serializers tests', function () {
     describe('Full primitive model', () => {
         const tJSON = {
             id: 12,
+            bool: true,
             inputBodyName: 'Test body text'
         };
         const tModel = new TestModel();
         tModel.id = 12;
+        tModel.bool = true;
         tModel.body = 'Test body text';
 
         it('should serialize', () => {

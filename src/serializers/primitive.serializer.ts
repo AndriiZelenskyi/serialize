@@ -1,7 +1,7 @@
 import {Serializer} from "./serializer";
 import {ifPresentGet} from "./field.utils";
 
-export class PrimitiveSerializer<T extends Number | String> implements Serializer<T>{
+export class PrimitiveSerializer<T extends Number | String | Boolean> implements Serializer<T>{
     serialize: (model: T) => Object | null;
     deserialize: (json: Object) => T | null;
 
