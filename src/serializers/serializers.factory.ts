@@ -24,6 +24,7 @@ export class SerializersFactory {
             instance = new SerializersFactory();
             instance.registerSerializer<Number>(Number, new PrimitiveSerializer<Number>());
             instance.registerSerializer<String>(String, new PrimitiveSerializer<String>());
+            instance.registerSerializer<Boolean>(Boolean, new PrimitiveSerializer<Boolean>());
             instance.registerSerializer<Date>(Date, new DateSerializer<Date>());
         }
         return instance;
