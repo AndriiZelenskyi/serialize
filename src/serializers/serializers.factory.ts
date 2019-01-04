@@ -1,4 +1,4 @@
-import {Type} from "../type";
+import {Constructor} from "../type";
 import {Serializer} from "./serializer";
 import {PrimitiveSerializer} from "./primitive.serializer";
 import {DateSerializer} from "./date.serializer";
@@ -6,16 +6,16 @@ import {DateSerializer} from "./date.serializer";
 let instance: SerializersFactory;
 
 export class SerializersFactory {
-    private serializersMap = new Map<Type<any>, Serializer<any>>();
+    private serializersMap = new Map<Constructor<any>, Serializer<any>>();
 
     // noinspection JSUnusedLocalSymbols
     private constructor() {}
 
-    getSerializer<T>(type: Type<T>): Serializer<T> | undefined {
+    getSerializer<T>(type: Constructor<T>): Serializer<T> | undefined {
         return this.serializersMap.get(type);
     }
 
-    registerSerializer<T>(type: Type<T>, serializer: Serializer<T>): void {
+    registerSerializer<T>(type: Constructor<T>, serializer: Serializer<T>): void {
         this.serializersMap.set(type, serializer);
     }
 
