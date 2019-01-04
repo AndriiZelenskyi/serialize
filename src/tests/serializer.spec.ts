@@ -1,6 +1,6 @@
 import {Type, Serializer, Field, serialize, deserialize} from '../index';
 
-fdescribe('Serialize decorator', () => {
+describe('Serialize decorator', () => {
     class CustomSerializer implements Serializer<any> {
         serialize(model: any): Object {
             return model;
