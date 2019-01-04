@@ -1,4 +1,4 @@
-import { Type, isType } from "../type";
+import { Constructor } from "../type";
 import { Serializer as ISerializer, SerializersFactory } from "../serializers";
 import { NoSerializerError } from "../errors/no-serializer.error";
 import { __FIELD_SERIALIZER_METADATA_KEY } from "../metadata/metadata.keys";
@@ -7,7 +7,7 @@ import { defineFieldName } from "../metadata/define-field-name";
 /**
  * Defines a serializer for any serialization or deserialization of your field
  */
-export function Serializer(): PropertyDecorator;
+export function Type(): PropertyDecorator;
 /**
  * Defines a serializer by passed parameter @param modelType
  * Try to find a serializer for your model type in @type {SerializersFactory}
@@ -15,8 +15,8 @@ export function Serializer(): PropertyDecorator;
  * @throws {NoSerializerError} if serializer was missing
  * @param modelType Constructor of model wich registered as {@Model}
  */
-export function Serializer<T extends Object>(
-  modelType: Type<T>
+export function Type<T extends Object>(
+  modelType: Constructor<T>
 ): PropertyDecorator;
 /**
  * Defines your custom serializer for this field
@@ -24,11 +24,11 @@ export function Serializer<T extends Object>(
  *
  * @param {ISerializer} serializer Custom serializer for this field only!
  */
-export function Serializer<T extends Object>(
+export function Type<T extends Object>(
   serializer: ISerializer<T>
 ): PropertyDecorator;
-export function Serializer<T extends Object>(
-  serializerOrType?: Type<T> | ISerializer<T>
+export function Type<T extends Object>(
+  serializerOrType?: Constructor<T> | ISerializer<T>
 ): PropertyDecorator {
   return (target: Object, propertyKey: string | symbol): void => {
     const key = propertyKey.toString();
@@ -48,9 +48,9 @@ export function Serializer<T extends Object>(
 }
 
 function getSerializerFromParams<T>(
-  defaultType: Type<T>,
+  defaultType: Constructor<T>,
   propertyName: string,
-  serializerOrType?: Type<T> | ISerializer<T>
+  serializerOrType?: Constructor<T> | ISerializer<T>
 ): ISerializer<T> {
   if (typeof serializerOrType === "object") {
     return serializerOrType;
@@ -64,7 +64,7 @@ function getSerializerFromParams<T>(
  * @param type Model type
  */
 function getSerializerForType<T>(
-  type: Type<T>,
+  type: Constructor<T>,
   propertyName: string
 ): ISerializer<T> {
   if (type === undefined) {
