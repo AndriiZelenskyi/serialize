@@ -135,7 +135,7 @@ class Test {
 
     @Field()
     @Name('numbers')
-    @Serializer(new ArraySerializer(new PrimitiveSerializer()))
+    @Type(new ArraySerializer(new PrimitiveSerializer()))
     arrayOfNumbers: number[];
 }
 
@@ -173,7 +173,7 @@ class Model {
     id: 12;
 
     @Field()
-    @Serializer(new CustomSerializer())
+    @Type(new CustomSerializer())
     customField: any;
 }
 
