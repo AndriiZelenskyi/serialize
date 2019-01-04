@@ -1,4 +1,4 @@
-import { Type } from "../type";
+import { Constructor } from "../type";
 import { FieldMetadata } from "../field/field.metadata";
 import { NoFieldsError } from "../errors";
 import { getPropertyOfJson, parseJsonPropertyName } from "./json-utils";
@@ -8,12 +8,12 @@ import { getMetadata } from "../metadata/get-metadata";
  * Convert json for type that you need with updated names
  *
  * @param {Object} json
- * @param {Type<T extends Object>} modelType
+ * @param {Constructor<T extends Object>} modelType
  * @returns {T}
  */
 export function deserialize<T extends Object>(
   json: Object,
-  modelType: Type<T>
+  modelType: Constructor<T>
 ): T {
   const model = new modelType();
   const modelPrototype = Object.getPrototypeOf(model);

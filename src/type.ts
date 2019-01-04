@@ -1,6 +1,6 @@
-export type Type<T extends Object> = {new(): T};
+export type Constructor<T extends Object> = {new(): T};
 
-export function isType<T>(candidate: any): candidate is Type<T> {
+export function isConstructor<T>(candidate: any): candidate is Constructor<T> {
     if(typeof candidate === 'function') {
         return true;
     }
