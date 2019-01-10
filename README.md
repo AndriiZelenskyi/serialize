@@ -11,6 +11,7 @@ Don`t use the spread operator for copying of your models because prototypes chai
 1. Add a dependency to your package.json file:
 
 `npm install serialize-ts --save` or `yarn add serialize-ts`;
+
 2. Change a tsconfig.json:
 
 ```json
