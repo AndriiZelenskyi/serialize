@@ -1,8 +1,8 @@
-import { Constructor } from "../type";
-import { Serializer as ISerializer, SerializersFactory } from "../serializers";
-import { NoSerializerError } from "../errors/no-serializer.error";
-import { __FIELD_SERIALIZER_METADATA_KEY } from "../metadata/metadata.keys";
-import { defineFieldName } from "../metadata/define-field-name";
+import { Constructor } from '../type';
+import { Serializer as ISerializer, SerializersFactory } from '../serializers';
+import { NoSerializerError } from '../errors';
+import { __FIELD_SERIALIZER_METADATA_KEY } from '../metadata/metadata.keys';
+import { defineFieldName } from '../metadata/define-field-name';
 
 /**
  * Defines a serializer for any serialization or deserialization of your field
@@ -33,7 +33,7 @@ export function Type<T extends Object>(
   return (target: Object, propertyKey: string | symbol): void => {
     const key = propertyKey.toString();
     const serializer = getSerializerFromParams(
-      Reflect.getMetadata("design:type", target, propertyKey),
+      Reflect.getMetadata('design:type', target, propertyKey),
       key,
       serializerOrType
     );
@@ -52,7 +52,7 @@ function getSerializerFromParams<T>(
   propertyName: string,
   serializerOrType?: Constructor<T> | ISerializer<T>
 ): ISerializer<T> {
-  if (typeof serializerOrType === "object") {
+  if (typeof serializerOrType === 'object') {
     return serializerOrType;
   }
   return getSerializerForType(serializerOrType || defaultType, propertyName);
@@ -68,7 +68,7 @@ function getSerializerForType<T>(
   propertyName: string
 ): ISerializer<T> {
   if (type === undefined) {
-    throw new Error("Count find type for field: " + propertyName);
+    throw new Error('Count find type for field: ' + propertyName);
   }
   const serializer = SerializersFactory.instance.getSerializer(type);
   if (serializer === undefined) {

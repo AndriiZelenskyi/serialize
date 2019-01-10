@@ -1,10 +1,9 @@
-import { FIELDS_METADATA_KEY } from "../metadata/metadata.keys";
-import { FieldMetadata } from "../field/field.metadata";
-import { NoFieldsError } from "../errors";
-import { parseJsonPropertyName, setPropertyToJson } from "./json-utils";
-import "reflect-metadata";
-import { isPresent } from "../serializers/field.utils";
-import { getMetadata } from "../metadata/get-metadata";
+import { FieldMetadata } from '../field/field.metadata';
+import { NoFieldsError } from '../errors';
+import { parseJsonPropertyName, setPropertyToJson } from './json-utils';
+import 'reflect-metadata';
+import { isPresent } from '../serializers/field.utils';
+import { getMetadata } from '../metadata/get-metadata';
 
 /**
  * Convert model to json with metadata names

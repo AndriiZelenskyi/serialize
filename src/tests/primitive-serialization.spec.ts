@@ -1,93 +1,93 @@
-import {Field} from "../decorators";
-import {deserialize, serialize} from "../converters";
+import { Field } from '../decorators';
+import { deserialize, serialize } from '../converters';
 
 class TestModel {
-    @Field()
-    id: number;
+  @Field()
+  id: number;
 
-    @Field()
-    bool: boolean;
+  @Field()
+  bool: boolean;
 
-    @Field({jsonPropertyName: 'inputBodyName'})
-    body: string;
+  @Field({ jsonPropertyName: 'inputBodyName' })
+  body: string;
 }
 
-describe('Primitive serializers tests', function () {
-    describe('With default jsonPropertyName', () => {
-        const tJSON = {
-            id: 12
-        };
-        const test = new TestModel();
-        test.id = 12;
+describe('Primitive serializers tests', function() {
+  describe('With default jsonPropertyName', () => {
+    const tJSON = {
+      id: 12
+    };
+    const test = new TestModel();
+    test.id = 12;
 
-        it('should serialize field', () => {
-            const serializedJSON = serialize(test);
-            expect(serializedJSON).toEqual(tJSON);
-        });
-
-        it('should deserialize field', () => {
-            const deserializedModel = deserialize(tJSON, TestModel);
-            expect(deserializedModel instanceof TestModel).toBeTruthy();
-            expect(deserializedModel.id).toEqual(test.id);
-        })
+    it('should serialize field', () => {
+      const serializedJSON = serialize(test);
+      expect(serializedJSON).toEqual(tJSON);
     });
 
-    describe('With custom jsonPropertyName', () => {
-        const tJSON = {
-            inputBodyName: 'Test boby txt'
-        };
-        const tModel = new TestModel();
-        tModel.body = 'Test boby txt';
+    it('should deserialize field', () => {
+      const deserializedModel = deserialize(tJSON, TestModel);
+      expect(deserializedModel instanceof TestModel).toBeTruthy();
+      expect(deserializedModel.id).toEqual(test.id);
+    });
+  });
 
-        it('should serialize field', () => {
-            const serializedJSON = serialize(tModel);
-            expect(serializedJSON).toEqual(tJSON);
-        });
+  describe('With custom jsonPropertyName', () => {
+    const tJSON = {
+      inputBodyName: 'Test boby txt'
+    };
+    const tModel = new TestModel();
+    tModel.body = 'Test boby txt';
 
-        it('should deserialize field', () => {
-            const deserializedModel = deserialize(tJSON, TestModel);
-            expect(deserializedModel instanceof TestModel).toBeTruthy();
-            expect(deserializedModel.body).toEqual(tModel.body);
-        });
+    it('should serialize field', () => {
+      const serializedJSON = serialize(tModel);
+      expect(serializedJSON).toEqual(tJSON);
     });
 
-    describe('Full primitive model', () => {
-        const tJSON = {
-            id: 12,
-            bool: true,
-            inputBodyName: 'Test body text'
-        };
-        const tModel = new TestModel();
-        tModel.id = 12;
-        tModel.bool = true;
-        tModel.body = 'Test body text';
-
-        it('should serialize', () => {
-            const serializedJSON = serialize(tModel);
-            expect(serializedJSON).toEqual(tJSON);
-        });
-
-        it('should deserialize', () => {
-            const deserializedModel = deserialize(tJSON, TestModel);
-            expect(deserializedModel instanceof TestModel).toBeTruthy();
-            expect(deserializedModel).toEqual(tModel);
-        });
+    it('should deserialize field', () => {
+      const deserializedModel = deserialize(tJSON, TestModel);
+      expect(deserializedModel instanceof TestModel).toBeTruthy();
+      expect(deserializedModel.body).toEqual(tModel.body);
     });
-    describe('Zero number serialization', () => {
-        const tJSON = {
-            id: 0
-        };
-        const tModel = new TestModel();
-        tModel.id = 0;
+  });
 
-        it('should serialize', () => {
-            const serializedJSON = serialize(tModel);
-            expect(serializedJSON).toEqual(tJSON);
-        });
+  describe('Full primitive model', () => {
+    const tJSON = {
+      id: 12,
+      bool: true,
+      inputBodyName: 'Test body text'
+    };
+    const tModel = new TestModel();
+    tModel.id = 12;
+    tModel.bool = true;
+    tModel.body = 'Test body text';
 
-        it('should deserialize', () => {
-            const deserializedModel = deserialize(tJSON, TestModel);
-            expect(deserializedModel).toEqual(tModel);
-        });
-    })
+    it('should serialize', () => {
+      const serializedJSON = serialize(tModel);
+      expect(serializedJSON).toEqual(tJSON);
+    });
+
+    it('should deserialize', () => {
+      const deserializedModel = deserialize(tJSON, TestModel);
+      expect(deserializedModel instanceof TestModel).toBeTruthy();
+      expect(deserializedModel).toEqual(tModel);
+    });
+  });
+  describe('Zero number serialization', () => {
+    const tJSON = {
+      id: 0
+    };
+    const tModel = new TestModel();
+    tModel.id = 0;
+
+    it('should serialize', () => {
+      const serializedJSON = serialize(tModel);
+      expect(serializedJSON).toEqual(tJSON);
+    });
+
+    it('should deserialize', () => {
+      const deserializedModel = deserialize(tJSON, TestModel);
+      expect(deserializedModel).toEqual(tModel);
+    });
+  });
 });

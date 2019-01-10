@@ -1,8 +1,8 @@
-import { Constructor } from "../type";
-import { FieldMetadata } from "../field/field.metadata";
-import { NoFieldsError } from "../errors";
-import { getPropertyOfJson, parseJsonPropertyName } from "./json-utils";
-import { getMetadata } from "../metadata/get-metadata";
+import { Constructor } from '../type';
+import { FieldMetadata } from '../field/field.metadata';
+import { NoFieldsError } from '../errors';
+import { getPropertyOfJson, parseJsonPropertyName } from './json-utils';
+import { getMetadata } from '../metadata/get-metadata';
 
 /**
  * Convert json for type that you need with updated names
@@ -39,7 +39,7 @@ function setFieldMetadataToModel(
   if (jsonValue !== null) {
     model[
       fieldMetadata.modelPropertyName
-    ] = fieldMetadata.serializer.deserialize(jsonValue);
+      ] = fieldMetadata.serializer.deserialize(jsonValue);
   }
 }
 

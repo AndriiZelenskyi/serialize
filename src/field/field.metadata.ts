@@ -1,5 +1,5 @@
-import { FieldConfig } from "./field.config";
-import { Serializer } from "../serializers";
+import { FieldConfig } from './field.config';
+import { Serializer } from '../serializers';
 
 export interface FieldMetadata extends FieldConfig {
   /**
