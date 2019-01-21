@@ -37,7 +37,7 @@ Simple model:
 ```typescript
 class TestModel {
   @Field()
-  @Name("sever-id")
+  @Name("server-id")
   id: number;
 
   @Field()
@@ -61,28 +61,20 @@ console.log(serialize(model));
 const obj = {
   "server-id": 12,
   fullName: "Default full name",
-  "custom-date-name": "2017-08-01T06:09:53.802Z"
+  ignoredField: "some ignored value"
 };
 
 console.log(deserialize(obj, TestModel));
 
 /*Output -> TestModel {
     id: 12,
-    fullName: 'Default full name',
-    startDate: new Date('2017-08-01T06:09:53.802Z')
+    fullName: 'Default full name'
 }*/
 ```
 
 Nested models:
 
 ```typescript
-class OuterModel {
-    @Field()
-    id: number;
-
-    @Field()
-    nestedModel: NestedModel;
-}
 
 @Model()
 class NestedModel {
@@ -90,6 +82,14 @@ class NestedModel {
     firstField: number;
     @Field()
     secondField: string;
+}
+
+class OuterModel {
+    @Field()
+    id: number;
+
+    @Field()
+    nestedModel: NestedModel;
 }
 
 const obj = {
@@ -100,7 +100,7 @@ const obj = {
     }
 };
 
-const outerModel = deserialize(obj, TestModel);
+const outerModel = deserialize(obj, OuterModel);
 console.log(outerModel);
 
 /*
