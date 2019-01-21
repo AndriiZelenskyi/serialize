@@ -4,7 +4,7 @@ describe('README.md', () => {
     it('Simple model example should be correct', () => {
         class TestModel {
             @Field()
-            @Name("server-id")
+            @Name('server-id')
             id: number;
 
             @Field()
@@ -15,15 +15,15 @@ describe('README.md', () => {
 
         const model = new TestModel();
         model.id = 12;
-        model.fullName = "Default full name";
-        model.ignoredField = { customName: "test" };
+        model.fullName = 'Default full name';
+        model.ignoredField = { customName: 'test' };
 
         expect(serialize(model)).toEqual({ 'server-id': 12, 'fullName': 'Default full name' });
 
         const obj = {
-            "server-id": 12,
-            fullName: "Default full name",
-            "custom-date-name": "2017-08-01T06:09:53.802Z"
+            'server-id': 12,
+            fullName: 'Default full name',
+            'custom-date-name': '2017-08-01T06:09:53.802Z'
         };
 
         const deserialized = deserialize(obj, TestModel);
@@ -69,7 +69,7 @@ describe('README.md', () => {
             id: 12,
             nestedModel: {
                 firstField: 24,
-                secondField: "Some awesome string!"
+                secondField: 'Some awesome string!'
             }
         });
     });
@@ -78,22 +78,22 @@ describe('README.md', () => {
         class Test {
             @Field()
             id: number;
-        
+
             @Field()
             @Name('numbers')
             @Type(new ArraySerializer(new PrimitiveSerializer()))
             arrayOfNumbers: number[];
         }
-        
+
         const obj = {
             id: 12,
             numbers: [12, 24, 36, 48]
         };
-        
+
         const deserializedModel = deserialize(obj, Test);
         expect(deserializedModel instanceof Test).toBeTruthy();
         expect(deserializedModel.id).toEqual(12);
         expect(Array.isArray(deserializedModel.arrayOfNumbers)).toBeTruthy();
         expect(deserializedModel.arrayOfNumbers).toEqual([12, 24, 36, 48]);
     });
-})
+});

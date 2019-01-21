@@ -7,7 +7,7 @@ export class ModelSerializer<T extends Object> implements Serializer<T> {
   serialize: (model: T) => Object | null;
   deserialize: (json: Object) => T | null;
 
-  constructor(private type: Constructor<T>) {
+  constructor(type: Constructor<T>) {
     this.serialize = model => model ? serialize(model) : null;
     this.deserialize = json => json ? deserialize(json, type) : null;
   }

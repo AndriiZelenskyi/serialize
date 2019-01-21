@@ -10,8 +10,8 @@ import { getMetadata } from '../metadata/get-metadata';
  *
  * Fields that not are labeled as {@link Field} will be ignore
  *
- * @param {Object} model Serializable model that was convert to json
- * @returns {Object} Server object
+ * @param model Serializable model that was convert to json
+ * @returns Server object
  */
 export function serialize(model: { [key: string]: any }): Object {
   const modelPrototype = Object.getPrototypeOf(model);

@@ -1,5 +1,5 @@
-import { Field } from '../decorators';
-import { deserialize, serialize } from '../converters';
+import { Field, serialize, deserialize } from '..';
+import { Name } from '../decorators';
 
 class TestModel {
   @Field()
@@ -8,7 +8,8 @@ class TestModel {
   @Field()
   bool: boolean;
 
-  @Field({ jsonPropertyName: 'inputBodyName' })
+  @Field()
+  @Name('inputBodyName')
   body: string;
 }
 

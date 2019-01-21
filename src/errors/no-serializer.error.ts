@@ -1,4 +1,7 @@
-const DEFAULT_ERROR_MESSAGE = 'No serializer! Use serializer from config or serializer factory!\n Maybe you miss @Model at your model class?';
+const DEFAULT_ERROR_MESSAGE = `
+  No serializer! Use serializer from config or serializer factory!\n
+  Maybe you miss @Model at your model class?
+`;
 
 export class NoSerializerError extends Error {
   public name = 'NoSerializerError';

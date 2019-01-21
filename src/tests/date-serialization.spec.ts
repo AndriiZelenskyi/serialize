@@ -1,9 +1,8 @@
-import { Field } from '../decorators';
-import { DateSerializer } from '../serializers';
-import { deserialize, serialize } from '../converters';
+import { Field, Type, DateSerializer, serialize, deserialize } from '..';
 
 class TestModel {
-  @Field({ serializer: new DateSerializer() })
+  @Field()
+  @Type(new DateSerializer())
   date: Date;
 }
 

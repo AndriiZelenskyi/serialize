@@ -10,7 +10,7 @@ import { __FIELD_JSON_NAME_METADATA_KEY, __FIELD_SERIALIZER_METADATA_KEY } from 
  */
 export function Field(): PropertyDecorator;
 /**
- * @deprecated use @type {Name} and @type {Serializer} instead
+ * @deprecated use {@link Name} and {@link Serializer} instead
  */
 export function Field(config: FieldConfig): PropertyDecorator;
 export function Field(config?: FieldConfig): PropertyDecorator {

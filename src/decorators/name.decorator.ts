@@ -10,8 +10,9 @@ export function Name(): PropertyDecorator;
  * Define a property name in JSON format.
  * Can be used with name as point
  *
- * @param jsonPropertyName {string} Name of field in JSON format.
- */export function Name(jsonPropertyName: string): PropertyDecorator;
+ * @param jsonPropertyName Name of field in JSON format.
+ */
+export function Name(jsonPropertyName: string): PropertyDecorator;
 export function Name(jsonPropertyName?: string): PropertyDecorator {
   return (target: Object, propertyKey: string | symbol) => {
     const key: string = propertyKey.toString();
@@ -19,4 +20,4 @@ export function Name(jsonPropertyName?: string): PropertyDecorator {
     Reflect.defineMetadata(__FIELD_JSON_NAME_METADATA_KEY, jsonKey, target, propertyKey);
     defineFieldName(target, key);
   };
-} 
+}

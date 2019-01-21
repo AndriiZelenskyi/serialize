@@ -1,12 +1,10 @@
-import { Field } from '../decorators';
-import { ArraySerializer, ModelSerializer } from '../serializers';
-import { PrimitiveSerializer } from '../serializers/primitive.serializer';
-import { deserialize, serialize } from '../converters';
+import { Field, Type, ArraySerializer, PrimitiveSerializer, deserialize, serialize, Name, ModelSerializer } from '..';
 
 describe('Array serialization and deserialization', () => {
   describe('Primitive array', () => {
     class TestModel {
-      @Field({ serializer: new ArraySerializer(new PrimitiveSerializer<Number>()) })
+      @Field()
+      @Type(new ArraySerializer(new PrimitiveSerializer<Number>()))
       primitives: Number[];
     }
 
@@ -51,10 +49,9 @@ describe('Array serialization and deserialization', () => {
     }
 
     class TestModel {
-      @Field({
-        serializer: new ArraySerializer(new ModelSerializer(SubModel)),
-        jsonPropertyName: 'children'
-      })
+      @Field()
+      @Name('children')
+      @Type(new ArraySerializer(new ModelSerializer(SubModel)))
       subModels: SubModel[];
     }
 

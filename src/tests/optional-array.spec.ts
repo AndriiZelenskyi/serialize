@@ -1,15 +1,14 @@
-import { Field } from '../decorators';
-import { ArraySerializer, ModelSerializer } from '../serializers';
-import { PrimitiveSerializer } from '../serializers/primitive.serializer';
-import { deserialize, serialize } from '../converters';
+import { Field, Type, ArraySerializer, PrimitiveSerializer, ModelSerializer, serialize, deserialize } from '..';
 
 class TestConfiguration {
-  @Field({ serializer: new ArraySerializer(new PrimitiveSerializer()) })
+  @Field()
+  @Type(new ArraySerializer(new PrimitiveSerializer()))
   fields?: Array<string>;
 }
 
 class TestModel {
-  @Field({ serializer: new ModelSerializer(TestConfiguration) })
+  @Field()
+  @Type(new ModelSerializer(TestConfiguration))
   configuration?: TestConfiguration;
 
   static getFull(fields: string[]): TestModel {

@@ -6,8 +6,7 @@ export class DateSerializer<T extends Date> implements Serializer<T> {
 
 
   /**
-   * If initializer does not set - use default new Date
-   * @param {(json: Object) => T} initializer
+   * @param initializer Function for creating date from json, {@link Date} by default
    */
   constructor(initializer?: (json: Object) => T) {
     this.serialize = model => model.toISOString();

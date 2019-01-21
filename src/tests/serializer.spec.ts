@@ -1,4 +1,4 @@
-import { deserialize, Field, serialize, Serializer, Type } from '../index';
+import { deserialize, Field, serialize, Serializer, Type } from '../';
 
 describe('Serialize decorator', () => {
   class CustomSerializer implements Serializer<any> {

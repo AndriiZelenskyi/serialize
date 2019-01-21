@@ -5,7 +5,10 @@
     "lib": [
       "es5",
       "es6",
-      "dom"
+      "dom",
+      "es2015.collection",
+      "es2015.core",
+      "es2015",
     ],
     "declaration": true,
     "sourceMap": true,
