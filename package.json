@@ -4,6 +4,7 @@
   "description": "Serializers for typescript",
   "main": "dist/index.js",
   "scripts": {
+    "commit": "npx git-cz",
     "test": "karma start karma.conf.js",
     "test-once": "karma start karma.conf.js --single-run",
     "compile": "tsc -p ./tsconfig.json",
