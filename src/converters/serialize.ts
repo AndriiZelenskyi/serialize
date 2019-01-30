@@ -4,6 +4,7 @@ import { parseJsonPropertyName, setPropertyToJson } from './json-utils';
 import 'reflect-metadata';
 import { isPresent } from '../serializers/field.utils';
 import { getMetadata } from '../metadata/get-metadata';
+import { SerializersFactory } from '../serializers';
 
 /**
  * Convert model to json with metadata names
@@ -15,6 +16,14 @@ import { getMetadata } from '../metadata/get-metadata';
  */
 export function serialize(model: { [key: string]: any }): Object {
   const modelPrototype = Object.getPrototypeOf(model);
+  if (SerializersFactory.instance.isSerializerPresent(modelPrototype.constructor)) {
+    const serializer = SerializersFactory.instance.getSerializer(modelPrototype.constructor);
+    if (serializer === undefined) {
+      throw new Error('Couldn\'t find serializer for a type ' + modelPrototype.constructor.name);
+    }
+    return serializer.serialize(model) || {};
+  }
+
   const fields = getMetadata(modelPrototype);
 
   if (fields.length === 0) {

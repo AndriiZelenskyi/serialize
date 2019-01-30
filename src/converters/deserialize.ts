@@ -3,6 +3,7 @@ import { FieldMetadata } from '../field/field.metadata';
 import { NoFieldsError } from '../errors';
 import { getPropertyOfJson, parseJsonPropertyName } from './json-utils';
 import { getMetadata } from '../metadata/get-metadata';
+import { SerializersFactory } from '../serializers';
 
 /**
  * Convert json for type that you need with updated names
@@ -17,6 +18,13 @@ export function deserialize<T extends Object>(
 ): T {
   const model = new modelType();
   const modelPrototype = Object.getPrototypeOf(model);
+  if(SerializersFactory.instance.isSerializerPresent(modelPrototype.constructor)) {
+    const serializer = SerializersFactory.instance.getSerializer(modelPrototype.constructor);
+    if(serializer === undefined) {
+      throw new Error('Couldn\'t find a serializer for a type ' + modelPrototype.constructor.name);
+    }
+    return <T>serializer.deserialize(json) || model;
+  }
   const fields = getMetadata(modelPrototype);
 
   if (fields.length === 0) {
