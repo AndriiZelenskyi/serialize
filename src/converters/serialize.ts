@@ -1,10 +1,6 @@
-import { FieldMetadata } from '../field/field.metadata';
-import { NoFieldsError } from '../errors';
-import { parseJsonPropertyName, setPropertyToJson } from './json-utils';
 import 'reflect-metadata';
-import { isPresent } from '../serializers/field.utils';
-import { getMetadata } from '../metadata/get-metadata';
 import { SerializersFactory } from '../serializers';
+import { ModelMetadataSerializer } from '../serializers/model-metadata.serializer';
 
 /**
  * Convert model to json with metadata names
@@ -16,37 +12,16 @@ import { SerializersFactory } from '../serializers';
  */
 export function serialize(model: { [key: string]: any }): Object {
   const modelPrototype = Object.getPrototypeOf(model);
-  if (SerializersFactory.instance.isSerializerPresent(modelPrototype.constructor)) {
-    const serializer = SerializersFactory.instance.getSerializer(modelPrototype.constructor);
+  const constructor = modelPrototype.constructor;
+  if (SerializersFactory.instance.isSerializerPresent(constructor)) {
+    const serializer = SerializersFactory.instance.getSerializer(constructor);
     if (serializer === undefined) {
-      throw new Error('Couldn\'t find serializer for a type ' + modelPrototype.constructor.name);
+      throw new Error('Couldn\'t find serializer for a type ' + constructor.name);
     }
     return serializer.serialize(model) || {};
+  } else {
+    SerializersFactory.instance.registerSerializer(constructor, new ModelMetadataSerializer(constructor));
+    return serialize(model);
   }
 
-  const fields = getMetadata(modelPrototype);
-
-  if (fields.length === 0) {
-    throw new NoFieldsError();
-  }
-
-  // Convert array of field metadata to json object
-  return fields.reduce(
-    (previousValue: { [k: string]: any }, currentValue: FieldMetadata) => {
-      const address = parseJsonPropertyName(<string>(
-        currentValue.jsonPropertyName
-      ));
-
-      const modelValue = model[currentValue.modelPropertyName];
-      if (isPresent(modelValue)) {
-        const serializedModelValue = currentValue.serializer.serialize(
-          modelValue
-        );
-        setPropertyToJson(previousValue, address, serializedModelValue);
-      }
-
-      return previousValue;
-    },
-    {}
-  );
 }
