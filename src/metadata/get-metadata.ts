@@ -1,17 +1,13 @@
 import { FieldMetadata } from '../field/field.metadata';
-import {
-  __FIELD_CLASS_FIELDS_METADATA_KEY,
-  __FIELD_JSON_NAME_METADATA_KEY,
-  __FIELD_SERIALIZER_METADATA_KEY
-} from './metadata.keys';
+import { __FIELD_CLASS_FIELDS_METADATA_KEY, __FIELD_JSON_NAME_METADATA_KEY, __FIELD_SERIALIZER_METADATA_KEY } from './metadata.keys';
 
-export function getMetadata<T>(type: any): FieldMetadata[] {
+export function getMetadata<T>(prototype: any): FieldMetadata[] {
   const properties: string[] = Array
-    .from((<Set<string>>Reflect.getMetadata(__FIELD_CLASS_FIELDS_METADATA_KEY, type) || new Set())
+    .from((<Set<string>>Reflect.getMetadata(__FIELD_CLASS_FIELDS_METADATA_KEY, prototype) || new Set())
       .values());
   return properties
-    .filter(isMetadataPresentForField(type))
-    .map(v => getMetadataFromField(type, v));
+    .filter(isMetadataPresentForField(prototype))
+    .map(v => getMetadataFromField(prototype, v));
 }
 
 function isMetadataPresentForField(
