@@ -3,11 +3,15 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.9.1
+
 jobs:
   install_dependencies:
-    docker:
-      - image: circleci/node:7.10
-
+    <<: *defaults
     steps:
       - checkout
 
@@ -23,42 +27,54 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
   linting:
-    docker:
-      - image: circleci/node:7.10
+    <<: *defaults
 
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-
+      - attach_workspace:
+          at: ~/repo
       - run: yarn tslint
   tests:
-    docker:
-      - image: circleci/node:7.10
+    <<: *defaults
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+      - attach_workspace:
+          at: ~/repo
       - run: yarn test-once
   compile:
-    docker:
-      - image: circleci/node:7.10
+    <<: *defaults
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: ~/repo
+
       - run: yarn compile
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
 workflows:
   version: 2
-  check_and_compile:
+  check_test_compile_deploy:
     jobs:
       - install_dependencies
       - linting:
@@ -71,3 +87,11 @@ workflows:
           requires:
             - linting
             - tests
+      - deploy:
+          requires:
+            - compile
+          filters:
+            tags:
+              only: /^\d+.\d+.\d+$/
+            branches:
+              only: master
