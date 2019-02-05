@@ -9,9 +9,6 @@ import { __FIELD_JSON_NAME_METADATA_KEY, __FIELD_SERIALIZER_METADATA_KEY } from 
  * Defines default Name and Serializer decorators if no one of them was not defined
  */
 export function Field(): PropertyDecorator;
-/**
- * @deprecated use {@link Name} and {@link Serializer} instead
- */
 export function Field(config: FieldConfig): PropertyDecorator;
 export function Field(config?: FieldConfig): PropertyDecorator {
   return combine(config && config.jsonPropertyName, config && config.serializer);

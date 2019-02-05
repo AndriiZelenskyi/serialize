@@ -1,14 +1,24 @@
 import { Serializer } from './serializer';
 import { Constructor } from '../type';
-import { serialize } from '../converters/serialize';
-import { deserialize } from '../converters/deserialize';
+import { ModelMetadataSerializer } from './model-metadata.serializer';
 
+/**
+ * @deprecated Use {@link ModelMetadataSerializer} instead this one
+ */
 export class ModelSerializer<T extends Object> implements Serializer<T> {
-  serialize: (model: T) => Object | null;
-  deserialize: (json: Object) => T | null;
+  private metadataSerializer: ModelMetadataSerializer<T>;
 
-  constructor(type: Constructor<T>) {
-    this.serialize = model => model ? serialize(model) : null;
-    this.deserialize = json => json ? deserialize(json, type) : null;
+  constructor(constructor: Constructor<T>) {
+    this.metadataSerializer = new ModelMetadataSerializer<T>(constructor);
   }
+
+  serialize(model: T): Object | null {
+    return this.metadataSerializer.serialize(model);
+  }
+
+  deserialize(json: Object): T | null {
+    return this.metadataSerializer.deserialize(json);
+  }
+
+
 }

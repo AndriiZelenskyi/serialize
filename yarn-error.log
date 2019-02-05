@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn tslint
+  /usr/bin/node /usr/bin/yarn test-once
 
 PATH: 
   /home/andrewzelenskiy/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
@@ -3796,9 +3796,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
+  Exit code: 1
   Command: sh
-  Arguments: -c tslint -p ./tslint.json
+  Arguments: -c karma start karma.conf.js --single-run
   Directory: /home/andrewzelenskiy/Code/github/serialize
   Output:
   
