@@ -8,8 +8,6 @@ jobs:
     docker:
       - image: circleci/node:7.10
 
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -35,7 +33,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
 
       - run: yarn tslint
   tests:
@@ -58,7 +55,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
       - run: yarn compile
 workflows:
   version: 2

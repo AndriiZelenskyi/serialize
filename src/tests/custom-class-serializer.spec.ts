@@ -1,4 +1,4 @@
-import { Model, Serializer, Field, serialize, deserialize } from '../';
+import { Model, Serializer, Field, serialize, deserialize, PrimitiveSerializer } from "../";
 
 function isJSONCorrect(json: Object): json is {name: string} {
   return json !== undefined && json.hasOwnProperty('name');
@@ -6,7 +6,7 @@ function isJSONCorrect(json: Object): json is {name: string} {
 
 class TestModelSerializer implements Serializer<TestModel> {
   deserialize(json: Object): TestModel | null {
-    if(isJSONCorrect(json)) {
+    if (isJSONCorrect(json)) {
       const deserializedModel = new TestModel();
       const [bar, foo] = json.name.split(';');
       deserializedModel.bar = bar;
@@ -27,10 +27,8 @@ const serializer = new TestModelSerializer();
 
 @Model(serializer)
 class TestModel {
-  @Field()
-  foo: string = 'Lorem ipsum';
-  @Field()
-  bar: string = 'Bob marley';
+  foo = 'Lorem ipsum';
+  bar = 'Bob marley';
 }
 describe('Custom class serializer', () => {
 

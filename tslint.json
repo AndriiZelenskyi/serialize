@@ -1,4 +1,9 @@
 {
+  "linterOptions": {
+    "exclude": [
+      "src/tests/**.ts"
+    ]
+  },
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,

@@ -27,14 +27,14 @@ export class ModelMetadataSerializer<T> implements Serializer<T> {
 
   private getFieldsMetadata(): FieldMetadata[] {
     const metadata = getMetadata(this.modelConstructor.prototype);
-    if(metadata.length === 0) {
+    if (metadata.length === 0) {
       throw new NoFieldsError();
     }
     return metadata;
   }
 
   private setValueToModel(model: {[key: string]: any}, metadata: FieldMetadata, jsonValue?: any): void {
-    if(isPresent(jsonValue)) {
+    if (isPresent(jsonValue)) {
       model[metadata.modelPropertyName] = metadata.serializer.deserialize(jsonValue);
     }
   }

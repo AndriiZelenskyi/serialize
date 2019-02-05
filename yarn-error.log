@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn test-once
+  /usr/bin/node /usr/bin/yarn tslint
 
 PATH: 
   /home/andrewzelenskiy/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
@@ -21,12 +21,11 @@ npm manifest:
     "main": "dist/index.js",
     "scripts": {
       "commit": "npx git-cz",
-      "test": "karma start karma.conf.js",
-      "test-once": "karma start karma.conf.js --single-run",
-      "compile": "tsc -p ./tsconfig.json",
-      "prepublish": "yarn test-once && yarn compile",
+      "test": "./node_modules/karma/bin/karma start karma.conf.js",
+      "test-once": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
+      "compile": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
       "format": "prettier-tslint fix '**/*.ts' ",
-      "tslint": "tslint -p ./tslint.json"
+      "tslint": "./node_modules/tslint/bin/tslint -p ./tslint.json"
     },
     "keywords": [
       "typescript",
@@ -3796,9 +3795,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: sh
-  Arguments: -c karma start karma.conf.js --single-run
+  Arguments: -c ./node_modules/tslint/bin/tslint -p ./tslint.json
   Directory: /home/andrewzelenskiy/Code/github/serialize
   Output:
   

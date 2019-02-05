@@ -5,12 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "commit": "npx git-cz",
-    "test": "karma start karma.conf.js",
-    "test-once": "karma start karma.conf.js --single-run",
-    "compile": "tsc -p ./tsconfig.json",
-    "prepublish": "yarn test-once && yarn compile",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "test-once": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
+    "compile": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
     "format": "prettier-tslint fix '**/*.ts' ",
-    "tslint": "tslint -p ./tslint.json"
+    "tslint": "./node_modules/tslint/bin/tslint -p ./tslint.json"
   },
   "keywords": [
     "typescript",
