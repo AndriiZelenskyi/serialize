@@ -9,18 +9,26 @@ import { ModelMetadataSerializer } from '../serializers/model-metadata.serialize
  * @param constructor A model constructor for creation of object.
  * @returns A deserialized model as an instance of your class.
  */
+export function deserialize<T extends Object>(json: Object, constructor: Constructor<T>): T;
+export function deserialize<T extends Object>(constructor: Constructor<T>): (json: Object) => T;
 export function deserialize<T extends Object>(
-  json: Object,
-  constructor: Constructor<T>
-): T {
+  jsonOrConstructor: Object | Constructor<T>,
+  constructor?: Constructor<T>
+): ((json: Object) => T) | T {
+  if (typeof jsonOrConstructor === 'function') {
+    return (json: Object) => deserialize(json, jsonOrConstructor);
+  }
+  if (constructor === undefined) {
+    throw new Error('Please provide a constructor');
+  }
   if (SerializersFactory.instance.isSerializerPresent(constructor)) {
     const serializer = SerializersFactory.instance.getSerializer(constructor);
     if (serializer === undefined) {
       throw new Error('Couldn\'t find a serializer for a type ' + constructor.name);
     }
-    return <T>serializer.deserialize(json);
+    return <T>serializer.deserialize(jsonOrConstructor);
   } else {
     SerializersFactory.instance.registerSerializer(constructor, new ModelMetadataSerializer(constructor));
-    return deserialize(json, constructor);
+    return deserialize(jsonOrConstructor, constructor);
   }
 }

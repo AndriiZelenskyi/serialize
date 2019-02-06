@@ -10,7 +10,7 @@ import { ModelMetadataSerializer } from '../serializers/model-metadata.serialize
  * @param model Serializable model that was convert to json
  * @returns Server object
  */
-export function serialize(model: { [key: string]: any }): Object {
+export function serialize<T>(model: T): Object {
   const modelPrototype = Object.getPrototypeOf(model);
   const constructor = modelPrototype.constructor;
   if (SerializersFactory.instance.isSerializerPresent(constructor)) {
