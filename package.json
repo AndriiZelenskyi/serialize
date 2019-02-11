@@ -1,6 +1,6 @@
 {
   "name": "serialize-ts",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Serializers for typescript",
   "main": "dist/index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "jasmine-core": "^2.9.0",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-es6-shim": "^1.0.0",
     "karma-jasmine": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-typescript": "^3.0.9",
