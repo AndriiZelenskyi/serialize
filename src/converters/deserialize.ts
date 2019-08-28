@@ -16,7 +16,7 @@ export function deserialize<T extends Object>(
   constructor?: Constructor<T>
 ): ((json: Object) => T) | T {
   if (typeof jsonOrConstructor === 'function') {
-    return (json: Object) => deserialize(json, jsonOrConstructor);
+    return (json: Object) => deserialize(json, <Constructor<T>><any>jsonOrConstructor);
   }
   if (constructor === undefined) {
     throw new Error('Please provide a constructor');

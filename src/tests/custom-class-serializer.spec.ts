@@ -54,7 +54,7 @@ describe('Custom class serializer', () => {
 
   it('should use a result from a custom serializer for a deserialization', () => {
     const JSON = {name: 'Test;Lor'};
-    spyOn(serializer, 'deserialize').and.returnValue('Test');
+    spyOn(serializer, 'deserialize').and.returnValue(<any>'Test');
     expect(deserialize(JSON, TestModel)).toEqual(<any>'Test');
   });
 });

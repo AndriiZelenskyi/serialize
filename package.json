@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "commit": "npx git-cz",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "test-once": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
+    "jest": "jest",
+    "test": "jest --watch",
+    "test-once": "jest",
     "compile": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
     "format": "prettier-tslint fix '**/*.ts' ",
     "tslint": "./node_modules/tslint/bin/tslint -p ./tslint.json"
@@ -23,6 +24,7 @@
   "author": "xoll",
   "license": "ISC",
   "dependencies": {
+    "@types/jasmine": "^3.4.0",
     "reflect-metadata": "^0.1.10"
   },
   "repository": {
@@ -30,19 +32,14 @@
     "url": "https://github.com/AndreyZelenskiy/serialize.git"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.8.4",
     "es6-shim": "^0.35.4",
-    "jasmine": "^2.9.0",
-    "jasmine-core": "^2.9.0",
-    "karma": "^1.7.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-es6-shim": "^1.0.0",
-    "karma-jasmine": "^1.1.1",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-typescript": "^3.0.9",
+    "jasmine": "^3.4.0",
+    "jest": "^24.9.0",
+    "jest-preset-typescript": "^1.2.0",
     "prettier": "^1.15.3",
     "prettier-tslint": "^0.4.0",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
-    "typescript": "^2.6.2"
+    "typescript": "^3.5.3"
   }
 }
