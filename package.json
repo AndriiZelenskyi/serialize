@@ -1,6 +1,6 @@
 {
   "name": "serialize-ts",
-  "version": "2.5.4",
+  "version": "2.6.0",
   "description": "Serializers for typescript",
   "main": "dist/index.js",
   "scripts": {
