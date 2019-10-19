@@ -1,9 +1,9 @@
 import { Model } from '../decorators';
 import { Field } from '../decorators/field.decorator';
-import { profile } from '../serializers/profile.serializer';
-import { model } from '../serializers/model-metadata.serializer';
 import { serialize } from '../converters';
 import { deserialize } from '../converters/deserialize';
+import { model } from '../serializers';
+import { profile } from '../serializers/profile.serializer';
 
 @Model()
 class Reference {

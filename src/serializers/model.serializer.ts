@@ -12,11 +12,15 @@ export class ModelSerializer<T extends Object> implements Serializer<T> {
     this.metadataSerializer = new ModelMetadataSerializer<T>(constructor);
   }
 
-  serialize(model: T): Object | null {
-    return this.metadataSerializer.serialize(model);
+  serialize(modelForSerialization: T, additionalInfo: any): Object | null {
+    return this.metadataSerializer.serialize(modelForSerialization, additionalInfo);
   }
 
-  deserialize(json: Object): T | null {
-    return this.metadataSerializer.deserialize(json);
+  deserialize(json: Object, additionalInfo: any): T | null {
+    return this.metadataSerializer.deserialize(json, additionalInfo);
   }
+}
+
+export function model<T>(constructor: Constructor<T>): ModelMetadataSerializer<T> {
+  return new ModelMetadataSerializer<T>(constructor);
 }

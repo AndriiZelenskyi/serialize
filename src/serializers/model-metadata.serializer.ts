@@ -37,7 +37,7 @@ export class ModelMetadataSerializer<T> implements Serializer<T> {
     }
   }
 
-  serialize(model: T, additionalInfo: any): Object | null {
+  serialize(model: T, additionalInfo?: any): Object | null {
     const fields = this.getFieldsMetadata();
 
     return fields.reduce((dict: { [key: string]: any }, metadata: FieldMetadata) => {
@@ -49,8 +49,4 @@ export class ModelMetadataSerializer<T> implements Serializer<T> {
       return dict;
     }, {});
   }
-}
-
-export function model<T>(constructor: Constructor<T>): ModelMetadataSerializer<T> {
-  return new ModelMetadataSerializer<T>(constructor);
 }
