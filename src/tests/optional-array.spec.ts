@@ -22,7 +22,6 @@ class TestModel {
 
 describe('Optional model fields', () => {
   describe('Full model', () => {
-
     const fullJSON = {
       configuration: {
         fields: ['a', 'b', 'c']
@@ -39,7 +38,6 @@ describe('Optional model fields', () => {
       const deserializedModel = deserialize(fullJSON, TestModel);
       expect(deserializedModel).toEqual(fullModel);
     });
-
   });
 
   describe('Missing sub field', () => {

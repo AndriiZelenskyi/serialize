@@ -19,6 +19,4 @@ export class ModelSerializer<T extends Object> implements Serializer<T> {
   deserialize(json: Object): T | null {
     return this.metadataSerializer.deserialize(json);
   }
-
-
 }

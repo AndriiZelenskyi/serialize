@@ -9,8 +9,7 @@ export class SerializersFactory {
   private serializersMap = new Map<Constructor<any>, Serializer<any>>();
 
   // noinspection JSUnusedLocalSymbols
-  private constructor() {
-  }
+  private constructor() {}
 
   static get instance(): SerializersFactory {
     if (!instance) {

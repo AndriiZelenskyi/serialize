@@ -6,6 +6,6 @@ export class ArraySerializer<T extends Object> implements Serializer<Array<T>> {
 
   constructor(serializer: Serializer<T>) {
     this.serialize = model => model.map(v => serializer.serialize(v));
-    this.deserialize = json => json ? (json as Array<Object>).map(v => serializer.deserialize(v)) as Array<T> : null;
+    this.deserialize = json => (json ? ((json as Array<Object>).map(v => serializer.deserialize(v)) as Array<T>) : null);
   }
 }

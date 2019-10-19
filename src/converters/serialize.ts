@@ -10,18 +10,19 @@ import { ModelMetadataSerializer } from '../serializers/model-metadata.serialize
  * @param model Serializable model that was convert to json
  * @returns Server object
  */
-export function serialize<T>(model: T): Object {
+export function serialize<T>(model: T): Object;
+export function serialize<T, I>(model: T, additionalInfo: I): Object;
+export function serialize<T, I>(model: T, additionalInfo?: I): Object {
   const modelPrototype = Object.getPrototypeOf(model);
   const constructor = modelPrototype.constructor;
   if (SerializersFactory.instance.isSerializerPresent(constructor)) {
     const serializer = SerializersFactory.instance.getSerializer(constructor);
     if (serializer === undefined) {
-      throw new Error('Couldn\'t find serializer for a type ' + constructor.name);
+      throw new Error("Couldn't find serializer for a type " + constructor.name);
     }
-    return serializer.serialize(model) || {};
+    return serializer.serialize(model, additionalInfo) || {};
   } else {
     SerializersFactory.instance.registerSerializer(constructor, new ModelMetadataSerializer(constructor));
-    return serialize(model);
+    return serialize(model, additionalInfo);
   }
-
 }

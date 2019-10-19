@@ -4,7 +4,6 @@ import { Name } from './name.decorator';
 import { Type } from './type.decorator';
 import { __FIELD_JSON_NAME_METADATA_KEY, __FIELD_SERIALIZER_METADATA_KEY } from '../metadata/metadata.keys';
 
-
 /**
  * Defines default Name and Serializer decorators if no one of them was not defined
  */

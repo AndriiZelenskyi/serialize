@@ -9,4 +9,3 @@ export function defineFieldName(target: Object, propertyName: string | symbol): 
     currentSet.add(propertyName.toString());
   }
 }
-

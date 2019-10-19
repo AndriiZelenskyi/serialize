@@ -10,4 +10,3 @@ export class PrimitiveSerializer<T extends Number | String | Boolean> implements
     this.deserialize = json => ifPresentGet(<T>json, <any>undefined)(json);
   }
 }
-

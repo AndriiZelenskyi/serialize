@@ -1,6 +1,6 @@
-import { Model, Serializer, Field, serialize, deserialize, PrimitiveSerializer } from "../";
+import { Model, Serializer, Field, serialize, deserialize, PrimitiveSerializer } from '../';
 
-function isJSONCorrect(json: Object): json is {name: string} {
+function isJSONCorrect(json: Object): json is { name: string } {
   return json !== undefined && json.hasOwnProperty('name');
 }
 
@@ -18,9 +18,8 @@ class TestModelSerializer implements Serializer<TestModel> {
   }
 
   serialize(model: TestModel): Object | null {
-    return {name: model.bar + ';' + model.foo};
+    return { name: model.bar + ';' + model.foo };
   }
-
 }
 
 const serializer = new TestModelSerializer();
@@ -31,7 +30,6 @@ class TestModel {
   bar = 'Bob marley';
 }
 describe('Custom class serializer', () => {
-
   it('should use a custom serializer for whole model', () => {
     spyOn(serializer, 'serialize').and.callThrough();
     const model = new TestModel();
@@ -40,20 +38,20 @@ describe('Custom class serializer', () => {
   });
 
   it('should use a result from serializer as serialized value', () => {
-    spyOn(serializer, 'serialize').and.returnValue({name: 'test'});
+    spyOn(serializer, 'serialize').and.returnValue({ name: 'test' });
     const model = new TestModel();
-    expect(serialize(model)).toEqual({name: 'test'});
+    expect(serialize(model)).toEqual({ name: 'test' });
   });
 
   it('should use a custom serializer for a deserialization', () => {
     spyOn(serializer, 'deserialize').and.callThrough();
-    const JSON = {name: 'Test;Lor'};
+    const JSON = { name: 'Test;Lor' };
     deserialize(JSON, TestModel);
     expect(serializer.deserialize).toHaveBeenCalledTimes(1);
   });
 
   it('should use a result from a custom serializer for a deserialization', () => {
-    const JSON = {name: 'Test;Lor'};
+    const JSON = { name: 'Test;Lor' };
     spyOn(serializer, 'deserialize').and.returnValue(<any>'Test');
     expect(deserialize(JSON, TestModel)).toEqual(<any>'Test');
   });

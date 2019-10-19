@@ -20,10 +20,12 @@ class TestModel {
 describe('Model serialization', function() {
   const tJSON = {
     subModel: {
-      id: 12, body: 'Test body text'
+      id: 12,
+      body: 'Test body text'
     },
     inputModel: {
-      id: 13, body: 'Test second body text'
+      id: 13,
+      body: 'Test second body text'
     }
   };
 

@@ -18,7 +18,7 @@ export function getPropertyOfJson(json: Object, propertyAddress: string[]): Obje
   return ifPresentGet(value, null)(value);
 }
 
-function reduceAddress(json: Object, propertyAddress: string[]): { lastAddress: string, reduce: { [k: string]: any } } {
+function reduceAddress(json: Object, propertyAddress: string[]): { lastAddress: string; reduce: { [k: string]: any } } {
   const copyOfAddress = propertyAddress.map(v => '' + v);
   const lastAddress = copyOfAddress.pop() || '';
   const reduce: { [k: string]: any } = copyOfAddress.reduce((pV: { [k: string]: any }, cV) => {

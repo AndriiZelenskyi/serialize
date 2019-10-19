@@ -8,7 +8,7 @@ class TestModel {
   @Field()
   body: string;
 
-  @Field({jsonPropertyName: 'nested.nested.path'})
+  @Field({ jsonPropertyName: 'nested.nested.path' })
   complicatedPathVariable: number;
 }
 
@@ -16,7 +16,7 @@ describe('ModelMetadataSerializer', () => {
   let serializer: ModelMetadataSerializer<TestModel>;
   const JSON = {
     'server-id': 12,
-    'body': 'Lorem Ipsum',
+    body: 'Lorem Ipsum',
     nested: {
       nested: {
         path: 48
@@ -48,7 +48,7 @@ describe('ModelMetadataSerializer', () => {
     model.id = 24;
     model.body = 'Test body';
     model.complicatedPathVariable = 48;
-    const expected = { 'server-id': 24, body: 'Test body', nested: {nested: {path: 48}} };
+    const expected = { 'server-id': 24, body: 'Test body', nested: { nested: { path: 48 } } };
     expect(serializer.serialize(model)).toEqual(expected);
   });
 });
