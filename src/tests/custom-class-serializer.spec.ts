@@ -1,4 +1,4 @@
-import { Model, Serializer, Field, serialize, deserialize, PrimitiveSerializer } from '../';
+import { deserialize, Model, serialize, Serializer } from '../';
 
 function isJSONCorrect(json: Object): json is { name: string } {
   return json !== undefined && json.hasOwnProperty('name');
@@ -29,6 +29,7 @@ class TestModel {
   foo = 'Lorem ipsum';
   bar = 'Bob marley';
 }
+
 describe('Custom class serializer', () => {
   it('should use a custom serializer for whole model', () => {
     spyOn(serializer, 'serialize').and.callThrough();

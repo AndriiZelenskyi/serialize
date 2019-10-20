@@ -10,7 +10,7 @@
     "test-once": "jest",
     "compile": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
     "format": "prettier-tslint fix '**/*.ts' ",
-    "tslint": "./node_modules/tslint/bin/tslint -p ./tslint.json"
+    "lint": "./node_modules/tslint/bin/tslint -p ./tslint.json && ./node_modules/.bin/prettier -c \"**/*.ts\"\n"
   },
   "keywords": [
     "typescript",

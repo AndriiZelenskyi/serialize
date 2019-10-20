@@ -2,16 +2,14 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es5",
-      "es6",
-      "dom"
-    ],
+    "lib": ["es5", "es6", "dom"],
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strictPropertyInitialization": false
   },
   "include": ["src/**.ts", "src/metadata/metadata.keys.ts", "src/field/metadata.keys.ts", "src/metadata/define-metadata-once.ts"],
