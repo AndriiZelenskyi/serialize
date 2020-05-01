@@ -10,7 +10,7 @@ export class ModelMetadataSerializer<T> implements Serializer<T> {
   constructor(private modelConstructor: Constructor<T>) {}
 
   deserialize(json: Object, additionalInfo?: any): T | null {
-    const deserializedModel = new this.modelConstructor();
+    const deserializedModel = Object.create(this.modelConstructor.prototype);
 
     const fields = this.getFieldsMetadata();
 
