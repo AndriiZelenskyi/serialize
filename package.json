@@ -24,6 +24,7 @@
   "author": "xoll",
   "license": "ISC",
   "dependencies": {
+    "@types/jasmine": "^3.4.0",
     "reflect-metadata": "^0.1.10"
   },
   "repository": {
@@ -33,6 +34,7 @@
   "devDependencies": {
     "es6-shim": "^0.35.4",
     "jest": "^25.5.4",
+    "jasmine": "^3.4.0",
     "jest-preset-typescript": "^1.2.0",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.0",
