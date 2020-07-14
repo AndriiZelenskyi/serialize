@@ -1,5 +1,5 @@
 export function isPresent(obj: Object): boolean {
-  return obj !== undefined && obj !== null;
+  return obj !== undefined;
 }
 
 export function ifPresentGet<T, K>(presentResult: T, notPresentResult: K): (obj: Object) => T | K {
