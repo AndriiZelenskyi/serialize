@@ -33,11 +33,11 @@
   },
   "devDependencies": {
     "es6-shim": "^0.35.4",
-    "jest": "^25.5.4",
     "jasmine": "^3.4.0",
+    "jest": "^27.4.7",
     "jest-preset-typescript": "^1.2.0",
     "prettier": "^1.18.2",
-    "prettier-tslint": "^0.4.2",
+    "prettier-tslint": "^0.2.0",
     "ts-jest": "^25.5.1",
     "tslint": "^6.1.2",
     "typescript": "^3.5.3"
